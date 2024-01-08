@@ -1,7 +1,7 @@
 # Personal Todos
 
 An easy todo manager for managing all todos, a no hassle app!!
-Interactive Todo manager app for all!!
+Interactive Todo manager app for all!!!
 
 ### Prerequisites
 
