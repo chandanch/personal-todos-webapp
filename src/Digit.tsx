@@ -1,7 +1,7 @@
 function Digit() {
     return (
         <div>
-            <h1>Hello</h1>
+            <h1>Digit Comp</h1>
         </div>
     );
 }

@@ -1,14 +1,11 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import Digit from './Digit';
 
 function App() {
     return (
-        <div className="App">
-            <header className="App-header">
-                <img src={logo} className="App-logo" alt="logo" />
-                <p>Personal Todos App</p>
-            </header>
+        <div>
+            <p>Personal Todos App</p>
+            <Digit />
         </div>
     );
 }
