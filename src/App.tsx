@@ -1,13 +1,12 @@
-import React from 'react';
+import React, { FC, ReactElement } from 'react';
 import Digit from './Digit';
 
-function App() {
+const App: FC = (): ReactElement => {
     return (
         <div>
-            <p>Personal Todos App</p>
-            <Digit />
+            Personl Todos Manager <Digit />{' '}
         </div>
     );
-}
+};
 
 export default App;
