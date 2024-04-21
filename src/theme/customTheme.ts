@@ -12,5 +12,11 @@ export const customTheme: ThemeOptions = createTheme({
             paper: '#151515',
             default: '#263238',
         },
+        error: {
+            main: '#f44336',
+        },
+        warning: {
+            main: '#ffa726',
+        },
     },
 });
