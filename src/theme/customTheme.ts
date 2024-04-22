@@ -9,7 +9,7 @@ export const customTheme: ThemeOptions = createTheme({
             dark: '#0D47A1',
         },
         background: {
-            paper: '#151515',
+            paper: '#37474f',
             default: '#263238',
         },
         error: {
