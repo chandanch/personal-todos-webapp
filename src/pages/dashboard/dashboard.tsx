@@ -1,5 +1,6 @@
 import { Grid } from '@mui/material';
 import React, { FC, ReactElement } from 'react';
+import SideBar from '../../components/sidebar';
 
 const Dashboard: FC = (): ReactElement => {
     return (
@@ -25,7 +26,7 @@ const Dashboard: FC = (): ReactElement => {
                     alignItems: 'center',
                 }}
             >
-                <h2>Todos Create & profile </h2>
+                <SideBar />
             </Grid>
         </Grid>
     );
