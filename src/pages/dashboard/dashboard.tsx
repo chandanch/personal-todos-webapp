@@ -1,12 +1,13 @@
 import { Grid } from '@mui/material';
 import React, { FC, ReactElement } from 'react';
-import SideBar from '../../components/sidebar';
+import SideBar from '../../components/sidebar/sidebar';
+import TaskContainer from '../../components/taskContainer/taskContainer';
 
 const Dashboard: FC = (): ReactElement => {
     return (
         <Grid container minHeight="100vh" m={0} p={0}>
             <Grid item md={8} sm={12} xs={12} px={4}>
-                <h2>Todos List Area</h2>
+                <TaskContainer />
             </Grid>
             <Grid
                 item
