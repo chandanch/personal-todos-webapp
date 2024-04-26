@@ -14,9 +14,4 @@ const reportWebVitals = (onPerfEntry?: ReportHandler) => {
     }
 };
 
-const getDetails = () => {
-    console.log('Details');
-    console.log('Darta');
-};
-
 export default reportWebVitals;
