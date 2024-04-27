@@ -1,6 +1,6 @@
 import React, { FC, ReactElement } from 'react';
 import { Avatar, Box, Typography } from '@mui/material';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import { IProfile } from '../../interfaces/iprofile';
 
 // specify the prop type as an generic type param to FC type
@@ -38,6 +38,10 @@ const Profile: FC<IProfile> = (props): ReactElement => {
             </Typography>
         </Box>
     );
+};
+
+Profile.propTypes = {
+    name: PropTypes.string.isRequired,
 };
 
 export default Profile;
