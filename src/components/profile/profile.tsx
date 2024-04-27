@@ -1,8 +1,11 @@
 import React, { FC, ReactElement } from 'react';
 import { Avatar, Box, Typography } from '@mui/material';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
+import { IProfile } from '../../interfaces/iprofile';
 
-const Profile: FC = (props: any): ReactElement => {
+// specify the prop type as an generic type param to FC type
+// TS will assign this generic type param as prop type
+const Profile: FC<IProfile> = (props): ReactElement => {
     const { name = 'Chandio' } = props;
 
     const date: Date = new Date();
@@ -23,7 +26,7 @@ const Profile: FC = (props: any): ReactElement => {
                 }}
             >
                 <Typography variant="h4" color="text.primary">
-                    {name.substring(0, 2)}
+                    {name.substring(0, 2).toUpperCase()}
                 </Typography>
             </Avatar>
             <Typography variant="h6" color="text.primary">
@@ -35,10 +38,6 @@ const Profile: FC = (props: any): ReactElement => {
             </Typography>
         </Box>
     );
-};
-
-Profile.propTypes = {
-    name: PropTypes.string,
 };
 
 export default Profile;

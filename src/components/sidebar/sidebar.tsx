@@ -4,7 +4,7 @@ import Profile from '../profile/profile';
 const SideBar: FC = (): ReactElement => {
     return (
         <div>
-            <Profile />
+            <Profile name="Mario" />
         </div>
     );
 };
