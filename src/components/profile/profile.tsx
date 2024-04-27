@@ -19,7 +19,7 @@ const Profile: FC = (): ReactElement => {
                     marginBottom: '16px',
                 }}
             >
-                <Typography variant="h4" color="text.secondary">
+                <Typography variant="h4" color="text.primary">
                     CH
                 </Typography>
             </Avatar>
