@@ -13,6 +13,7 @@ const CreateTaskForm: FC = (): ReactElement => {
             <Typography mb={2} component="h2" variant="h6">
                 Create Task
             </Typography>
+            {/* TODO: Create task form */}
         </Box>
     );
 };
