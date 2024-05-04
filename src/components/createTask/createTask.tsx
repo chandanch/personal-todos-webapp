@@ -1,7 +1,20 @@
+import { Box, Typography } from '@mui/material';
 import React, { FC, ReactElement } from 'react';
 
-const CreateTask: FC = (): ReactElement => {
-    return <div>Create new task</div>;
+const CreateTaskForm: FC = (): ReactElement => {
+    return (
+        <Box
+            display="flex"
+            flexDirection="column"
+            alignItems="flex-start"
+            width={'100%'}
+            px={4}
+        >
+            <Typography mb={2} component="h2" variant="h6">
+                Create Task
+            </Typography>
+        </Box>
+    );
 };
 
-export default CreateTask;
+export default CreateTaskForm;
