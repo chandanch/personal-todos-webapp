@@ -11,6 +11,7 @@ const TaskTitleField: FC = (): ReactElement => {
             size="small"
             name="title"
             fullWidth
+            color="info"
         />
     );
 };

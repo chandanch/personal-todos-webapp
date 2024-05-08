@@ -13,6 +13,7 @@ const TaskDescField: FC = (): ReactElement => {
             multiline
             rows={4}
             fullWidth
+            color="info"
         />
     );
 };
