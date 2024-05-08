@@ -4,10 +4,10 @@ import CreateTaskForm from '../createTaskForm/createTaskForm';
 
 const SideBar: FC = (): ReactElement => {
     return (
-        <div>
+        <>
             <Profile name="Mario" />
             <CreateTaskForm />
-        </div>
+        </>
     );
 };
 
