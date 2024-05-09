@@ -11,7 +11,7 @@ const TaskDescField: FC = (): ReactElement => {
             size="small"
             name="description"
             multiline
-            rows={4}
+            rows={5}
             fullWidth
             color="info"
         />
