@@ -14,7 +14,7 @@ const CreateTaskForm: FC = (): ReactElement => {
             my={6}
         >
             <Typography mb={2} component="h2" variant="h6">
-                Create Task
+                Create New Task
             </Typography>
             <Stack sx={{ width: '100%' }} spacing={2}>
                 <TaskTitleField />
