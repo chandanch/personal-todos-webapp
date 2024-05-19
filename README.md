@@ -6,3 +6,4 @@ An easy todo manager for managing all todos, a no hassle app!!
 
 1. Install Dependencies: `npm install`
 2. Run Application: `npm start`
+3. Build Application: `npm run build`
