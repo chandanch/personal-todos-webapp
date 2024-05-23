@@ -1,7 +1,8 @@
 import { TextField } from '@mui/material';
 import React, { FC, ReactElement } from 'react';
-import { ITextField } from '../interfaces/ITextField';
 import PropTypes from 'prop-types';
+
+import { ITextField } from '../interfaces/ITextField';
 
 const TaskTitleField: FC<ITextField> = (props): ReactElement => {
     const { onChange = () => {}, disabled = false } = props;
