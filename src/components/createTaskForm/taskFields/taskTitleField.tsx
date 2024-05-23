@@ -12,6 +12,8 @@ const TaskTitleField: FC = (): ReactElement => {
             name="title"
             fullWidth
             color="info"
+            disabled={false}
+            onChange={(e) => console.log(e.target.value)}
         />
     );
 };
