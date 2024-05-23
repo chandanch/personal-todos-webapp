@@ -1,7 +1,9 @@
 import { TextField } from '@mui/material';
 import React, { FC, ReactElement } from 'react';
+import { ITextField } from '../interfaces/ITextField';
 
-const TaskDescField: FC = (): ReactElement => {
+const TaskDescField: FC<ITextField> = (props): ReactElement => {
+    const { onChange = () => {}, disabled = false } = props;
     return (
         <TextField
             id="description"
@@ -14,6 +16,8 @@ const TaskDescField: FC = (): ReactElement => {
             rows={5}
             fullWidth
             color="info"
+            disabled={disabled}
+            onChange={onChange}
         />
     );
 };
