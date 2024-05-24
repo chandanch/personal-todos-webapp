@@ -23,6 +23,7 @@ const TaskTitleField: FC<ITextField> = (props): ReactElement => {
     );
 };
 
+// adding proptypes
 TaskTitleField.propTypes = {
     onChange: PropTypes.func,
     disabled: PropTypes.bool,
