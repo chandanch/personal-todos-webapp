@@ -9,16 +9,20 @@ const TaskDateField: FC = (): ReactElement => {
     return (
         <>
             {/* LocalizationProvider is a context provider component from the MUI (Material-UI) 
-              X Date Pickers library. 
-               It is used to provide a localization context for the date pickers in the application. 
-               This allows the date pickers to be formatted and displayed according to the 
-               specified locale and date management library
+                X Date Pickers library. 
+                It is used to provide a localization context for the date pickers in the application. 
+                
+                This allows the date pickers to be formatted and displayed according to the 
+                specified locale and date management library
             */}
             {/* AdapterDateFns is an adapter for the date-fns library, which is a popular date utility library for JavaScript.
-                It provides the necessary methods and functionalities required by the MUI date pickers to handle dates. 
+                
+                It provides the necessary methods and functionalities required by the MUI 
+                date pickers to handle dates. 
+                
                 This includes parsing, formatting, and date calculations
-                AdapterDateFns is passed as a prop to the LocalizationProvider, which then uses it to 
-                handle all date-related operations within the date picker.
+                AdapterDateFns is passed as a prop to the LocalizationProvider, 
+                which then uses it to handle all date-related operations within the date picker.
 
             */}
             <LocalizationProvider dateAdapter={AdapterDateFns}>
