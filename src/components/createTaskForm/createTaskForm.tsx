@@ -3,6 +3,7 @@ import React, { FC, ReactElement } from 'react';
 import TaskTitleField from './taskFields/taskTitleField';
 import TaskDescField from './taskFields/taskDescriptionField';
 import TaskDateField from './taskFields/taskDateField';
+import TaskSelectField from './taskFields/taskSelectField';
 
 const CreateTaskForm: FC = (): ReactElement => {
     return (
@@ -21,6 +22,10 @@ const CreateTaskForm: FC = (): ReactElement => {
                 <TaskTitleField disabled={false} />
                 <TaskDescField disabled={false} />
                 <TaskDateField />
+                <Stack spacing={2} direction="row">
+                    <TaskSelectField />
+                    <TaskSelectField />
+                </Stack>
             </Stack>
         </Box>
     );
