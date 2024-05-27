@@ -4,13 +4,14 @@ import React, { FC, ReactElement } from 'react';
 const TaskSelectField: FC = (): ReactElement => {
     return (
         <FormControl fullWidth size="small">
-            <InputLabel>Status</InputLabel>
+            <InputLabel color="info">Status</InputLabel>
             <Select
                 labelId="status"
                 id="status-select"
                 value=""
                 label="Status"
                 name="status"
+                color="info"
             >
                 <MenuItem value={10}>10</MenuItem>
                 <MenuItem value={20}>20</MenuItem>
