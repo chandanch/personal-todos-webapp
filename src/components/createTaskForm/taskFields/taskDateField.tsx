@@ -38,6 +38,9 @@ const TaskDateField: FC<IDateField> = (props): ReactElement => {
                     value={value}
                     onChange={onChange}
                     disabled={disabled}
+                    sx={{
+                        color: 'info',
+                    }}
                 />
 
                 {/*
