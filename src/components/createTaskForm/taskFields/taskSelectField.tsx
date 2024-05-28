@@ -1,7 +1,8 @@
 import { FormControl, InputLabel, MenuItem, Select } from '@mui/material';
 import React, { FC, ReactElement } from 'react';
+import { ISelectField } from '../interfaces/ISelectField';
 
-const TaskSelectField: FC = (): ReactElement => {
+const TaskSelectField: FC<ISelectField> = (): ReactElement => {
     return (
         <FormControl fullWidth size="small">
             <InputLabel color="info">Status</InputLabel>
