@@ -10,6 +10,6 @@ export interface ISelectField extends IDisabled {
     label?: string;
     name?: string;
     value?: string;
-    onChange: (e: SelectChangeEvent) => void;
-    options: ISelectOptions[];
+    onChange?: (e: SelectChangeEvent) => void;
+    options?: ISelectOptions[];
 }
