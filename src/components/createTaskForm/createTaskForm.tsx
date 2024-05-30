@@ -4,8 +4,41 @@ import TaskTitleField from './taskFields/taskTitleField';
 import TaskDescField from './taskFields/taskDescriptionField';
 import TaskDateField from './taskFields/taskDateField';
 import TaskSelectField from './taskFields/taskSelectField';
+import { ISelectOptions } from './interfaces/ISelectField';
+import { Priority } from '../../enums/priority';
+import { Status } from '../../enums/status';
 
 const CreateTaskForm: FC = (): ReactElement => {
+    const priorityOptions: ISelectOptions[] = [
+        {
+            label: Priority.low,
+            value: Priority.low,
+        },
+        {
+            label: Priority.high,
+            value: Priority.high,
+        },
+        {
+            label: Priority.normal,
+            value: Priority.normal,
+        },
+    ];
+
+    const statusOptions: Array<ISelectOptions> = [
+        {
+            label: Status.todo,
+            value: Status.todo,
+        },
+        {
+            label: Status.inProgress,
+            value: Status.inProgress,
+        },
+        {
+            label: Status.completed,
+            value: Status.inProgress,
+        },
+    ];
+
     return (
         <Box
             display="flex"
@@ -23,8 +56,16 @@ const CreateTaskForm: FC = (): ReactElement => {
                 <TaskDescField disabled={false} />
                 <TaskDateField />
                 <Stack spacing={2} direction="row">
-                    <TaskSelectField />
-                    <TaskSelectField />
+                    <TaskSelectField
+                        name="priority"
+                        label="Priority"
+                        options={priorityOptions}
+                    />
+                    <TaskSelectField
+                        name="status"
+                        label="Status"
+                        options={statusOptions}
+                    />
                 </Stack>
             </Stack>
         </Box>
