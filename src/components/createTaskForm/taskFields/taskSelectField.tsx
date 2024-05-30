@@ -1,5 +1,13 @@
-import { FormControl, InputLabel, MenuItem, Select } from '@mui/material';
+import {
+    FormControl,
+    InputLabel,
+    MenuItem,
+    Select,
+    SelectChangeEvent,
+} from '@mui/material';
 import React, { FC, ReactElement } from 'react';
+import PropTypes from 'prop-types';
+
 import { ISelectField } from '../interfaces/ISelectField';
 
 const TaskSelectField: FC<ISelectField> = (props): ReactElement => {
@@ -8,7 +16,7 @@ const TaskSelectField: FC<ISelectField> = (props): ReactElement => {
         value = '',
         name = 'selectBox',
         disabled = false,
-        onChange = (e) => {},
+        onChange = (e: SelectChangeEvent) => {},
         options = [{ label: 'Add Item', value: 'Add Item' }],
     } = props;
 
@@ -37,6 +45,20 @@ const TaskSelectField: FC<ISelectField> = (props): ReactElement => {
             </Select>
         </FormControl>
     );
+};
+
+TaskSelectField.propTypes = {
+    label: PropTypes.string,
+    value: PropTypes.string,
+    name: PropTypes.string,
+    disabled: PropTypes.bool,
+    onChange: PropTypes.func,
+    options: PropTypes.arrayOf(
+        PropTypes.shape({
+            value: PropTypes.string.isRequired,
+            label: PropTypes.string.isRequired,
+        }).isRequired,
+    ),
 };
 
 export default TaskSelectField;
