@@ -29,6 +29,7 @@ const TaskContainer: FC = (): ReactElement => {
                 <Grid item display="flex" flexDirection="column" xs={10} md={8}>
                     <Box>Task details</Box>
                     <Box>Task details</Box>
+                    <Box>Task details</Box>
                 </Grid>
             </Grid>
         </>
