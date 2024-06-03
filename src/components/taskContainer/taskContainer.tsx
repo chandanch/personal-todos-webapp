@@ -22,7 +22,7 @@ const TaskContainer: FC = (): ReactElement => {
                     xs={12}
                     mb={8}
                 >
-                    <Box>Task Counter</Box>
+                    <Box>Task Counter - TODO</Box>
                     <Box>Task Counter</Box>
                     <Box>Task Counter</Box>
                 </Grid>
