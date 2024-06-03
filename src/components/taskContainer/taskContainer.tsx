@@ -22,14 +22,14 @@ const TaskContainer: FC = (): ReactElement => {
                     xs={12}
                     mb={8}
                 >
-                    <Box>Task Counter</Box>
+                    <Box>Task Counter - TODO</Box>
                     <Box>Task Counter</Box>
                     <Box>Task Counter</Box>
                 </Grid>
                 <Grid item display="flex" flexDirection="column" xs={10} md={8}>
-                    <Box>Task details</Box>
-                    <Box>Task details</Box>
-                    <Box>Task details!</Box>
+                    <Box>Task details 1</Box>
+                    <Box>Task details 2</Box>
+                    <Box>Task details 3</Box>
                 </Grid>
             </Grid>
         </>
