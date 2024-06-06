@@ -30,6 +30,7 @@ const TaskContainer: FC = (): ReactElement => {
                     <Box>Task details 1</Box>
                     <Box>Task details 2</Box>
                     <Box>Task details 3</Box>
+                    <Box>Task details 3</Box>
                 </Grid>
             </Grid>
         </>
