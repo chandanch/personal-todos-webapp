@@ -20,9 +20,13 @@ const TaskCounter: FC = (): ReactElement => {
                         borderColor: 'primary.light',
                     }}
                 >
-                    <Typography>10</Typography>
+                    <Typography color="#ffffff" variant="h4">
+                        10
+                    </Typography>
                 </Avatar>
-                <Typography>Subtitle</Typography>
+                <Typography color="#ffffff" variant="h5" fontWeight="bold">
+                    Subtitle
+                </Typography>
             </Box>
         </>
     );
