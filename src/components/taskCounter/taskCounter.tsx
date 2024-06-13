@@ -1,7 +1,10 @@
 import { Avatar, Box, Typography } from '@mui/material';
 import React, { FC, ReactElement } from 'react';
+import { ITaskCounter } from './interfaces/ITaskCounter';
 
-const TaskCounter: FC = (): ReactElement => {
+const TaskCounter: FC<ITaskCounter> = (props): ReactElement => {
+    const { count, status } = props;
+
     return (
         <>
             <Box
@@ -21,11 +24,11 @@ const TaskCounter: FC = (): ReactElement => {
                     }}
                 >
                     <Typography color="#ffffff" variant="h4">
-                        10
+                        {count}
                     </Typography>
                 </Avatar>
                 <Typography color="#ffffff" variant="h5" fontWeight="bold">
-                    Subtitle
+                    {status}
                 </Typography>
             </Box>
         </>
