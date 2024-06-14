@@ -30,7 +30,7 @@ const TaskContainer: FC = (): ReactElement => {
                 </Grid>
                 <Grid item display="flex" flexDirection="column" xs={10} md={8}>
                     <Box>Task details 1</Box>
-                    <Box>Task details 2</Box>
+                    <Box>Task details TODO</Box>
                 </Grid>
             </Grid>
         </>
