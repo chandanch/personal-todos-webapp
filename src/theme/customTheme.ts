@@ -18,5 +18,9 @@ export const customTheme: ThemeOptions = createTheme({
         warning: {
             main: '#ffa726',
         },
+        secondary: {
+            main: '#ff5722',
+            light: '#9500ae',
+        },
     },
 });

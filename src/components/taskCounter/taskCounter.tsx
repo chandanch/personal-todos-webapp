@@ -1,6 +1,7 @@
 import { Avatar, Box, Typography } from '@mui/material';
 import React, { FC, ReactElement } from 'react';
 import { ITaskCounter } from './interfaces/ITaskCounter';
+import emitBorderColor from './helpers/emitBorderColor';
 
 const TaskCounter: FC<ITaskCounter> = (props): ReactElement => {
     const { count, status } = props;
@@ -20,7 +21,7 @@ const TaskCounter: FC<ITaskCounter> = (props): ReactElement => {
                         width: '96px',
                         height: '96px',
                         marginBottom: '16px',
-                        borderColor: 'primary.light',
+                        borderColor: `${emitBorderColor(status)}`,
                     }}
                 >
                     <Typography color="#ffffff" variant="h4">
