@@ -21,6 +21,7 @@ export const customTheme: ThemeOptions = createTheme({
         secondary: {
             main: '#ff5722',
             light: '#9500ae',
+            dark: '#4500ae',
         },
     },
 });
