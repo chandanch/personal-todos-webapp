@@ -23,5 +23,8 @@ export const customTheme: ThemeOptions = createTheme({
             light: '#9500ae',
             dark: '#4500ae',
         },
+        info: {
+            main: '#00E5FF',
+        },
     },
 });
