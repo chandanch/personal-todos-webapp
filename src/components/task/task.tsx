@@ -15,7 +15,7 @@ const Task: FC = (): ReactElement => {
                     width: '100%',
                     backgroundColor: 'background.paper',
                     border: '1px solid',
-                    borderColor: 'secondary.dark',
+                    borderColor: 'info.main',
                 }}
             >
                 Task Details
