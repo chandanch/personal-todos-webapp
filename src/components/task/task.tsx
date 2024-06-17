@@ -19,7 +19,7 @@ const Task: FC = (): ReactElement => {
                     borderColor: 'info.main',
                 }}
             >
-                <TaskHeader />
+                <TaskHeader title="Get Spare Tyres" taskDate={new Date()} />
             </Box>
         </>
     );
