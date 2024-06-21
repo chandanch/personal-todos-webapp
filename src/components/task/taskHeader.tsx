@@ -7,7 +7,7 @@ const TaskHeader: FC<ITaskHeader> = (props): ReactElement => {
     const { title, taskDate } = props;
 
     return (
-        <Box display="flex" width="100%" justifyContent="space-between" mb={4}>
+        <Box display="flex" width="100%" justifyContent="space-between" mb={2}>
             <Box>
                 <Typography>{title}</Typography>
             </Box>
