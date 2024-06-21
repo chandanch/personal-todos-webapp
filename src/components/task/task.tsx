@@ -21,7 +21,7 @@ const Task: FC = (): ReactElement => {
                 }}
             >
                 <TaskHeader title="Get Spare Tyres" taskDate={new Date()} />
-                <TaskBody />
+                <TaskBody description="Get some Types now for the car" />
             </Box>
         </>
     );
