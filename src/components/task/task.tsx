@@ -1,6 +1,7 @@
 import { Box } from '@mui/material';
 import React, { FC, ReactElement } from 'react';
 import TaskHeader from './taskHeader';
+import TaskBody from './taskBody';
 
 const Task: FC = (): ReactElement => {
     return (
@@ -20,6 +21,7 @@ const Task: FC = (): ReactElement => {
                 }}
             >
                 <TaskHeader title="Get Spare Tyres" taskDate={new Date()} />
+                <TaskBody />
             </Box>
         </>
     );
