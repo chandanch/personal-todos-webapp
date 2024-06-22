@@ -2,6 +2,8 @@ import { Box, Button, FormControlLabel, Switch } from '@mui/material';
 import React, { FC, ReactElement } from 'react';
 import { ITaskFooter } from './interfaces/ITaskFooter';
 
+import PropTypes from 'prop-types';
+
 const TaskFooter: FC<ITaskFooter> = (props): ReactElement => {
     const {
         onStatusToggle = (e) => console.log(e.target.value),
@@ -35,6 +37,11 @@ const TaskFooter: FC<ITaskFooter> = (props): ReactElement => {
             </Button>
         </Box>
     );
+};
+
+TaskFooter.propTypes = {
+    onmarkComplete: PropTypes.func.isRequired,
+    onStatusToggle: PropTypes.func.isRequired,
 };
 
 export default TaskFooter;

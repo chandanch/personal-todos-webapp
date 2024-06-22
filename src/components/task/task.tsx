@@ -23,7 +23,10 @@ const Task: FC = (): ReactElement => {
             >
                 <TaskHeader title="Get Spare Tyres" taskDate={new Date()} />
                 <TaskBody description="Get some Types now for the car" />
-                <TaskFooter />
+                <TaskFooter
+                    onStatusToggle={() => {}}
+                    onmarkComplete={() => {}}
+                />
             </Box>
         </>
     );
