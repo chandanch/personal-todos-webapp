@@ -12,8 +12,8 @@ const Task: FC = (): ReactElement => {
                 width="100%"
                 justifyContent="flex-start"
                 flexDirection="column"
-                mb={2}
-                p={4}
+                mb={4}
+                p={2}
                 sx={{
                     width: '100%',
                     backgroundColor: 'background.paper',
