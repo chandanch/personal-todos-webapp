@@ -3,8 +3,22 @@ import React, { FC, ReactElement } from 'react';
 import TaskHeader from './taskHeader';
 import TaskBody from './taskBody';
 import TaskFooter from './taskFooter';
+import { ITask } from './interfaces/ITask';
+import { Status } from '../../enums/status';
+import { Priority } from '../../enums/priority';
 
-const Task: FC = (): ReactElement => {
+const Task: FC<ITask> = (props): ReactElement => {
+    const {
+        title = '',
+        description = '',
+        id = '',
+        status = Status.completed,
+        priority = Priority.normal,
+        onStatusToggle = (e) => console.log('toggle status'),
+        onmarkComplete = (e) => console.log('Task Completed'),
+        taskDate = new Date(),
+    } = props;
+
     return (
         <>
             <Box
@@ -21,11 +35,11 @@ const Task: FC = (): ReactElement => {
                     borderColor: 'info.main',
                 }}
             >
-                <TaskHeader title="Get Spare Tyres" taskDate={new Date()} />
-                <TaskBody description="Get some Types now for the car" />
+                <TaskHeader title={title} taskDate={new Date()} />
+                <TaskBody description={description} />
                 <TaskFooter
-                    onStatusToggle={() => {}}
-                    onmarkComplete={() => {}}
+                    onStatusToggle={onStatusToggle}
+                    onmarkComplete={onmarkComplete}
                 />
             </Box>
         </>

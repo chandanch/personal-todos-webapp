@@ -1,4 +1,4 @@
 export interface ITaskHeader {
-    title: string;
-    taskDate: Date;
+    title?: string;
+    taskDate?: Date;
 }
