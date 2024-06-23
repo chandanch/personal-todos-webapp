@@ -11,8 +11,8 @@ import emitPriorityBorderColor from './helpers/emitPriorityBorderColor';
 
 const Task: FC<ITask> = (props): ReactElement => {
     const {
-        title = 'My Task Get Done',
-        description = '',
+        title = 'Get Rolls From Stores',
+        description = 'Get the Rolls from the stores',
         id = '',
         status = Status.completed,
         priority = Priority.high,
