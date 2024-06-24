@@ -3,8 +3,24 @@ import React, { FC, ReactElement } from 'react';
 import TaskHeader from './taskHeader';
 import TaskBody from './taskBody';
 import TaskFooter from './taskFooter';
+import { ITask } from './interfaces/ITask';
+import { Status } from '../../enums/status';
+import { Priority } from '../../enums/priority';
+import PropTypes from 'prop-types';
+import emitPriorityBorderColor from './helpers/emitPriorityBorderColor';
 
-const Task: FC = (): ReactElement => {
+const Task: FC<ITask> = (props): ReactElement => {
+    const {
+        title = 'Get Rolls From Stores',
+        description = 'Get the Rolls from the stores',
+        id = '',
+        status = Status.completed,
+        priority = Priority.high,
+        onStatusToggle = (e) => console.log('toggle status'),
+        onmarkComplete = (e) => console.log('Task Completed'),
+        taskDate = new Date(),
+    } = props;
+
     return (
         <>
             <Box
@@ -12,21 +28,34 @@ const Task: FC = (): ReactElement => {
                 width="100%"
                 justifyContent="flex-start"
                 flexDirection="column"
-                mb={2}
-                p={4}
+                mb={4}
+                p={2}
                 sx={{
                     width: '100%',
                     backgroundColor: 'background.paper',
                     border: '1px solid',
-                    borderColor: 'info.main',
+                    borderColor: `${emitPriorityBorderColor(priority)}`,
                 }}
             >
-                <TaskHeader title="Get Spare Tyres" taskDate={new Date()} />
-                <TaskBody description="Get some Types now for the car" />
-                <TaskFooter />
+                <TaskHeader title={title} taskDate={new Date()} />
+                <TaskBody description={description} />
+                <TaskFooter
+                    onStatusToggle={onStatusToggle}
+                    onmarkComplete={onmarkComplete}
+                />
             </Box>
         </>
     );
+};
+
+Task.propTypes = {
+    title: PropTypes.string,
+    description: PropTypes.string,
+    taskDate: PropTypes.instanceOf(Date),
+    onmarkComplete: PropTypes.func,
+    onStatusToggle: PropTypes.func,
+    status: PropTypes.string,
+    priority: PropTypes.string,
 };
 
 export default Task;

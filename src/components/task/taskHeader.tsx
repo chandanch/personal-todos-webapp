@@ -4,7 +4,7 @@ import { ITaskHeader } from './interfaces/ITaskHeader';
 import { format } from 'date-fns';
 
 const TaskHeader: FC<ITaskHeader> = (props): ReactElement => {
-    const { title, taskDate } = props;
+    const { title = '', taskDate = new Date() } = props;
 
     return (
         <Box display="flex" width="100%" justifyContent="space-between" mb={2}>
