@@ -6,14 +6,16 @@ import TaskFooter from './taskFooter';
 import { ITask } from './interfaces/ITask';
 import { Status } from '../../enums/status';
 import { Priority } from '../../enums/priority';
+import PropTypes from 'prop-types';
+import emitPriorityBorderColor from './helpers/emitPriorityBorderColor';
 
 const Task: FC<ITask> = (props): ReactElement => {
     const {
-        title = '',
+        title = 'My Task Get Done',
         description = '',
         id = '',
         status = Status.completed,
-        priority = Priority.normal,
+        priority = Priority.high,
         onStatusToggle = (e) => console.log('toggle status'),
         onmarkComplete = (e) => console.log('Task Completed'),
         taskDate = new Date(),
@@ -32,7 +34,7 @@ const Task: FC<ITask> = (props): ReactElement => {
                     width: '100%',
                     backgroundColor: 'background.paper',
                     border: '1px solid',
-                    borderColor: 'info.main',
+                    borderColor: `${emitPriorityBorderColor(priority)}`,
                 }}
             >
                 <TaskHeader title={title} taskDate={new Date()} />
@@ -44,6 +46,16 @@ const Task: FC<ITask> = (props): ReactElement => {
             </Box>
         </>
     );
+};
+
+Task.propTypes = {
+    title: PropTypes.string,
+    description: PropTypes.string,
+    taskDate: PropTypes.instanceOf(Date),
+    onmarkComplete: PropTypes.func,
+    onStatusToggle: PropTypes.func,
+    status: PropTypes.string,
+    priority: PropTypes.string,
 };
 
 export default Task;
