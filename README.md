@@ -8,7 +8,7 @@ Interactive Todo manager app for all!!
 ### Prerequisites
 
 1. node.js installed
-2. code editor installed
+2. VScode editor installed
 
 3. Install Dependencies: `npm install`
 4. Run Application: `npm start`
