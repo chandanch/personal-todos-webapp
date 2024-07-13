@@ -1,4 +1,13 @@
-import { Box, SelectChangeEvent, Stack, Typography } from '@mui/material';
+import {
+    Alert,
+    AlertTitle,
+    Box,
+    Button,
+    LinearProgress,
+    SelectChangeEvent,
+    Stack,
+    Typography,
+} from '@mui/material';
 import React, { FC, ReactElement, useState } from 'react';
 import TaskTitleField from './taskFields/taskTitleField';
 import TaskDescField from './taskFields/taskDescriptionField';
@@ -80,6 +89,13 @@ const CreateTaskForm: FC = (): ReactElement => {
             px={4}
             my={6}
         >
+            <Alert
+                severity="success"
+                sx={{ width: '100%', marginBottom: '16px' }}
+            >
+                <AlertTitle>Success</AlertTitle>
+                Todo has been added!
+            </Alert>
             <Typography mb={2} component="h2" variant="h6">
                 Create New Task
             </Typography>
@@ -100,6 +116,10 @@ const CreateTaskForm: FC = (): ReactElement => {
                         onChange={onPriorityChange}
                     />
                 </Stack>
+                <LinearProgress />
+                <Button variant="contained" size="large" fullWidth>
+                    Create Task
+                </Button>
             </Stack>
         </Box>
     );
