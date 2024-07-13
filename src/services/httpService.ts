@@ -45,4 +45,11 @@ const makeHTTPRequest = async <T>(
     }
 };
 
+// use of generic type param for funcs
+function logData<T>(name: T): Array<T> {
+    return [name];
+}
+
+logData<string>('dee');
+
 export default makeHTTPRequest;
