@@ -1,5 +1,5 @@
 import { Box, Stack, Typography } from '@mui/material';
-import React, { FC, ReactElement } from 'react';
+import React, { FC, ReactElement, useState } from 'react';
 import TaskTitleField from './taskFields/taskTitleField';
 import TaskDescField from './taskFields/taskDescriptionField';
 import TaskDateField from './taskFields/taskDateField';
@@ -38,6 +38,14 @@ const CreateTaskForm: FC = (): ReactElement => {
             value: Status.inProgress,
         },
     ];
+
+    const [title, setTitle] = useState<string | undefined>(undefined);
+    const [description, setDescription] = useState<string | undefined>(
+        undefined,
+    );
+    const [dueDate, setDueDate] = useState<Date | null>(new Date());
+    const [status, setStatus] = useState<string>(Status.todo);
+    const [priority, setPriority] = useState<string>(Priority.low);
 
     return (
         <Box
