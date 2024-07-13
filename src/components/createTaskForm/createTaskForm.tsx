@@ -117,7 +117,12 @@ const CreateTaskForm: FC = (): ReactElement => {
                     />
                 </Stack>
                 <LinearProgress />
-                <Button variant="contained" size="large" fullWidth>
+                <Button
+                    variant="contained"
+                    size="large"
+                    fullWidth
+                    onClick={() => console.log(title, description)}
+                >
                     Create Task
                 </Button>
             </Stack>
