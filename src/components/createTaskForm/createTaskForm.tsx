@@ -1,4 +1,4 @@
-import { Box, Stack, Typography } from '@mui/material';
+import { Box, SelectChangeEvent, Stack, Typography } from '@mui/material';
 import React, { FC, ReactElement, useState } from 'react';
 import TaskTitleField from './taskFields/taskTitleField';
 import TaskDescField from './taskFields/taskDescriptionField';
@@ -47,6 +47,30 @@ const CreateTaskForm: FC = (): ReactElement => {
     const [status, setStatus] = useState<string>(Status.todo);
     const [priority, setPriority] = useState<string>(Priority.low);
 
+    const onTitleChange = (
+        event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+    ) => {
+        setTitle(event.target.value);
+    };
+
+    const onDescChange = (
+        event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+    ) => {
+        setDescription(event.target.value);
+    };
+
+    const onDueDateChange = (newDate: Date | null) => {
+        setDueDate(newDate);
+    };
+
+    const onStatusChange = (event: SelectChangeEvent) => {
+        setStatus(event.target.value);
+    };
+
+    const onPriorityChange = (event: SelectChangeEvent) => {
+        setPriority(event.target.value);
+    };
+
     return (
         <Box
             display="flex"
@@ -60,19 +84,20 @@ const CreateTaskForm: FC = (): ReactElement => {
                 Create New Task
             </Typography>
             <Stack sx={{ width: '100%' }} spacing={2}>
-                <TaskTitleField disabled={false} />
-                <TaskDescField disabled={false} />
-                <TaskDateField />
+                <TaskTitleField onChange={onTitleChange} disabled={false} />
+                <TaskDescField onChange={onDescChange} disabled={false} />
+                <TaskDateField value={dueDate} onChange={onDueDateChange} />
                 <Stack spacing={2} direction="row">
                     <TaskSelectField
                         name="priority"
                         label="Priority"
                         options={priorityOptions}
+                        onChange={onStatusChange}
                     />
                     <TaskSelectField
                         name="status"
                         label="Status"
-                        options={statusOptions}
+                        onChange={onPriorityChange}
                     />
                 </Stack>
             </Stack>
