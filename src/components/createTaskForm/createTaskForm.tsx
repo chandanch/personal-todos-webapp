@@ -121,7 +121,15 @@ const CreateTaskForm: FC = (): ReactElement => {
                     variant="contained"
                     size="large"
                     fullWidth
-                    onClick={() => console.log(title, description)}
+                    onClick={() =>
+                        console.log(
+                            'User entered details',
+                            title,
+                            description,
+                            priority,
+                            status,
+                        )
+                    }
                 >
                     Create Task
                 </Button>
