@@ -16,6 +16,8 @@ import TaskSelectField from './taskFields/taskSelectField';
 import { ISelectOptions } from './interfaces/ISelectField';
 import { Priority } from '../../enums/priority';
 import { Status } from '../../enums/status';
+import { useMutation } from '@tanstack/react-query';
+import makeHTTPRequest from '../../services/httpService';
 
 const CreateTaskForm: FC = (): ReactElement => {
     const priorityOptions: ISelectOptions[] = [
@@ -79,6 +81,20 @@ const CreateTaskForm: FC = (): ReactElement => {
     const onPriorityChange = (event: SelectChangeEvent) => {
         setPriority(event.target.value);
     };
+
+    // Define your mutation function
+    const createTaskMutation = (data: unknown) => {
+        return makeHTTPRequest(
+            `${process.env.REACT_APP_BASE_URL}/tasks`,
+            'POST',
+            data,
+        );
+    };
+
+    // define create todo mutation
+    const createTask = useMutation({
+        mutationFn: createTaskMutation,
+    });
 
     return (
         <Box
