@@ -5,8 +5,8 @@ export interface ICreateTask {
     title: string;
     description: string;
     dueDate: Date;
-    priority: Priority.high | Priority.normal | Priority.low;
-    status: Status.todo | Status.inProgress | Status.completed;
+    priority: string;
+    status: string;
 }
 
 // usage of interface
@@ -16,4 +16,14 @@ const myTask: ICreateTask = {
     dueDate: new Date(),
     priority: Priority.low,
     status: Status.completed,
+};
+
+type MyRatings = {
+    rating: number;
+    group: number;
+};
+
+const raters: MyRatings = {
+    rating: 23,
+    group: 2,
 };
