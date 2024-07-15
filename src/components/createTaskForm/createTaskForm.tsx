@@ -18,6 +18,7 @@ import { Priority } from '../../enums/priority';
 import { Status } from '../../enums/status';
 import { useMutation } from '@tanstack/react-query';
 import makeHTTPRequest from '../../services/httpService';
+import { ICreateTask } from './interfaces/ICreateTask';
 
 const CreateTaskForm: FC = (): ReactElement => {
     const priorityOptions: ISelectOptions[] = [
@@ -46,7 +47,7 @@ const CreateTaskForm: FC = (): ReactElement => {
         },
         {
             label: Status.completed,
-            value: Status.inProgress,
+            value: Status.completed,
         },
     ];
 
@@ -57,20 +58,30 @@ const CreateTaskForm: FC = (): ReactElement => {
     const [dueDate, setDueDate] = useState<Date | null>(new Date());
     const [status, setStatus] = useState<string>(Status.todo);
     const [priority, setPriority] = useState<string>(Priority.low);
+    const [isCreateBtnDisabled, setCreateBtnState] = useState(true);
 
     const onTitleChange = (
         event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
     ) => {
+        title && description && dueDate
+            ? setCreateBtnState(false)
+            : setCreateBtnState(true);
         setTitle(event.target.value);
     };
 
     const onDescChange = (
         event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
     ) => {
+        title && description && dueDate
+            ? setCreateBtnState(false)
+            : setCreateBtnState(true);
         setDescription(event.target.value);
     };
 
     const onDueDateChange = (newDate: Date | null) => {
+        title && description && dueDate
+            ? setCreateBtnState(false)
+            : setCreateBtnState(true);
         setDueDate(newDate);
     };
 
@@ -83,7 +94,7 @@ const CreateTaskForm: FC = (): ReactElement => {
     };
 
     // Define your mutation function
-    const createTaskMutation = (data: unknown) => {
+    const createTask = (data: ICreateTask) => {
         return makeHTTPRequest(
             `${process.env.REACT_APP_BASE_URL}/tasks`,
             'POST',
@@ -92,9 +103,17 @@ const CreateTaskForm: FC = (): ReactElement => {
     };
 
     // define create todo mutation
-    const createTask = useMutation({
-        mutationFn: createTaskMutation,
+    const createTaskMutation = useMutation({
+        mutationFn: createTask,
     });
+
+    const onSubmitHandler = (): void => {
+        if (!title || !description || !dueDate) {
+            alert('title, description and due date are required');
+            return;
+        }
+        console.log('creating task');
+    };
 
     return (
         <Box
@@ -123,13 +142,16 @@ const CreateTaskForm: FC = (): ReactElement => {
                     <TaskSelectField
                         name="priority"
                         label="Priority"
+                        value={priority}
                         options={priorityOptions}
-                        onChange={onStatusChange}
+                        onChange={onPriorityChange}
                     />
                     <TaskSelectField
                         name="status"
                         label="Status"
-                        onChange={onPriorityChange}
+                        value={status}
+                        options={statusOptions}
+                        onChange={onStatusChange}
                     />
                 </Stack>
                 <LinearProgress />
@@ -137,15 +159,8 @@ const CreateTaskForm: FC = (): ReactElement => {
                     variant="contained"
                     size="large"
                     fullWidth
-                    onClick={() =>
-                        console.log(
-                            'User entered details',
-                            title,
-                            description,
-                            priority,
-                            status,
-                        )
-                    }
+                    disabled={isCreateBtnDisabled}
+                    onClick={onSubmitHandler}
                 >
                     Create Task
                 </Button>
