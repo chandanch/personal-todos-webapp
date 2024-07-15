@@ -58,20 +58,30 @@ const CreateTaskForm: FC = (): ReactElement => {
     const [dueDate, setDueDate] = useState<Date | null>(new Date());
     const [status, setStatus] = useState<string>(Status.todo);
     const [priority, setPriority] = useState<string>(Priority.low);
+    const [isCreateBtnDisabled, setCreateBtnState] = useState(true);
 
     const onTitleChange = (
         event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
     ) => {
+        title && description && dueDate
+            ? setCreateBtnState(false)
+            : setCreateBtnState(true);
         setTitle(event.target.value);
     };
 
     const onDescChange = (
         event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
     ) => {
+        title && description && dueDate
+            ? setCreateBtnState(false)
+            : setCreateBtnState(true);
         setDescription(event.target.value);
     };
 
     const onDueDateChange = (newDate: Date | null) => {
+        title && description && dueDate
+            ? setCreateBtnState(false)
+            : setCreateBtnState(true);
         setDueDate(newDate);
     };
 
@@ -84,7 +94,7 @@ const CreateTaskForm: FC = (): ReactElement => {
     };
 
     // Define your mutation function
-    const createTaskMutation = (data: ICreateTask) => {
+    const createTask = (data: ICreateTask) => {
         return makeHTTPRequest(
             `${process.env.REACT_APP_BASE_URL}/tasks`,
             'POST',
@@ -93,9 +103,17 @@ const CreateTaskForm: FC = (): ReactElement => {
     };
 
     // define create todo mutation
-    const createTask = useMutation({
-        mutationFn: createTaskMutation,
+    const createTaskMutation = useMutation({
+        mutationFn: createTask,
     });
+
+    const onSubmitHandler = (): void => {
+        if (!title || !description || !dueDate) {
+            alert('title, description and due date are required');
+            return;
+        }
+        console.log('creating task');
+    };
 
     return (
         <Box
@@ -141,15 +159,8 @@ const CreateTaskForm: FC = (): ReactElement => {
                     variant="contained"
                     size="large"
                     fullWidth
-                    onClick={() =>
-                        console.log(
-                            'User entered details',
-                            title,
-                            description,
-                            priority,
-                            status,
-                        )
-                    }
+                    disabled={isCreateBtnDisabled}
+                    onClick={onSubmitHandler}
                 >
                     Create Task
                 </Button>
