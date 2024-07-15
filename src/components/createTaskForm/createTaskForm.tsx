@@ -18,6 +18,7 @@ import { Priority } from '../../enums/priority';
 import { Status } from '../../enums/status';
 import { useMutation } from '@tanstack/react-query';
 import makeHTTPRequest from '../../services/httpService';
+import { ICreateTask } from './interfaces/ICreateTask';
 
 const CreateTaskForm: FC = (): ReactElement => {
     const priorityOptions: ISelectOptions[] = [
@@ -46,7 +47,7 @@ const CreateTaskForm: FC = (): ReactElement => {
         },
         {
             label: Status.completed,
-            value: Status.inProgress,
+            value: Status.completed,
         },
     ];
 
@@ -83,7 +84,7 @@ const CreateTaskForm: FC = (): ReactElement => {
     };
 
     // Define your mutation function
-    const createTaskMutation = (data: unknown) => {
+    const createTaskMutation = (data: ICreateTask) => {
         return makeHTTPRequest(
             `${process.env.REACT_APP_BASE_URL}/tasks`,
             'POST',
@@ -123,13 +124,16 @@ const CreateTaskForm: FC = (): ReactElement => {
                     <TaskSelectField
                         name="priority"
                         label="Priority"
+                        value={priority}
                         options={priorityOptions}
-                        onChange={onStatusChange}
+                        onChange={onPriorityChange}
                     />
                     <TaskSelectField
                         name="status"
                         label="Status"
-                        onChange={onPriorityChange}
+                        value={status}
+                        options={statusOptions}
+                        onChange={onStatusChange}
                     />
                 </Stack>
                 <LinearProgress />
