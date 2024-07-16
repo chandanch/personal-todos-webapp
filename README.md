@@ -3,8 +3,6 @@
 An easy todo manager for managing all todos, a no hassle app!!
 Interactive Todo manager app for all!!
 
-## Setup
-
 ### Prerequisites
 
 1. node.js installed
