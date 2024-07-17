@@ -63,25 +63,19 @@ const CreateTaskForm: FC = (): ReactElement => {
     const onTitleChange = (
         event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
     ) => {
-        title && description && dueDate
-            ? setCreateBtnState(false)
-            : setCreateBtnState(true);
+        setCreateBtnState(!(title && description && dueDate));
         setTitle(event.target.value);
     };
 
     const onDescChange = (
         event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
     ) => {
-        title && description && dueDate
-            ? setCreateBtnState(false)
-            : setCreateBtnState(true);
+        setCreateBtnState(!(title && description && dueDate));
         setDescription(event.target.value);
     };
 
     const onDueDateChange = (newDate: Date | null) => {
-        title && description && dueDate
-            ? setCreateBtnState(false)
-            : setCreateBtnState(true);
+        setCreateBtnState(!(title && description && dueDate));
         setDueDate(newDate);
     };
 
