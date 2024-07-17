@@ -55,33 +55,24 @@ const CreateTaskForm: FC = (): ReactElement => {
     const [description, setDescription] = useState<string | undefined>(
         undefined,
     );
-    const [dueDate, setDueDate] = useState<Date | null>(new Date());
+    const [duedate, setDueDate] = useState<Date | null>(new Date());
     const [status, setStatus] = useState<string>(Status.todo);
     const [priority, setPriority] = useState<string>(Priority.low);
-    const [isCreateBtnDisabled, setCreateBtnState] = useState(true);
+    const [showSuccessAlert, setshowSuccessAlert] = useState<boolean>(false);
 
     const onTitleChange = (
         event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
     ) => {
-        title && description && dueDate
-            ? setCreateBtnState(false)
-            : setCreateBtnState(true);
         setTitle(event.target.value);
     };
 
     const onDescChange = (
         event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
     ) => {
-        title && description && dueDate
-            ? setCreateBtnState(false)
-            : setCreateBtnState(true);
         setDescription(event.target.value);
     };
 
     const onDueDateChange = (newDate: Date | null) => {
-        title && description && dueDate
-            ? setCreateBtnState(false)
-            : setCreateBtnState(true);
         setDueDate(newDate);
     };
 
@@ -108,11 +99,32 @@ const CreateTaskForm: FC = (): ReactElement => {
     });
 
     const onSubmitHandler = (): void => {
-        if (!title || !description || !dueDate) {
+        if (!title || !description || !duedate) {
             alert('title, description and due date are required');
             return;
         }
-        console.log('creating task');
+
+        const taskReqData: ICreateTask = {
+            title,
+            description,
+            duedate: duedate.toISOString(),
+            priority,
+            status,
+        };
+
+        console.log('creating task', taskReqData);
+
+        createTaskMutation.mutate(taskReqData, {
+            onSuccess: () => {
+                // alert('Task Created');
+                setshowSuccessAlert(true);
+
+                setTimeout(() => {
+                    setshowSuccessAlert(false);
+                }, 5000);
+            },
+            onError: () => alert('Failed! Task creation'),
+        });
     };
 
     return (
@@ -124,20 +136,32 @@ const CreateTaskForm: FC = (): ReactElement => {
             px={4}
             my={6}
         >
-            <Alert
-                severity="success"
-                sx={{ width: '100%', marginBottom: '16px' }}
-            >
-                <AlertTitle>Success</AlertTitle>
-                Todo has been added!
-            </Alert>
+            {showSuccessAlert && (
+                <Alert
+                    severity="success"
+                    sx={{ width: '100%', marginBottom: '16px' }}
+                >
+                    <AlertTitle>Success</AlertTitle>
+                    Todo has been added!
+                </Alert>
+            )}
             <Typography mb={2} component="h2" variant="h6">
                 Create New Task
             </Typography>
             <Stack sx={{ width: '100%' }} spacing={2}>
-                <TaskTitleField onChange={onTitleChange} disabled={false} />
-                <TaskDescField onChange={onDescChange} disabled={false} />
-                <TaskDateField value={dueDate} onChange={onDueDateChange} />
+                <TaskTitleField
+                    onChange={onTitleChange}
+                    disabled={createTaskMutation.isPending}
+                />
+                <TaskDescField
+                    onChange={onDescChange}
+                    disabled={createTaskMutation.isPending}
+                />
+                <TaskDateField
+                    value={duedate}
+                    onChange={onDueDateChange}
+                    disabled={createTaskMutation.isPending}
+                />
                 <Stack spacing={2} direction="row">
                     <TaskSelectField
                         name="priority"
@@ -145,6 +169,7 @@ const CreateTaskForm: FC = (): ReactElement => {
                         value={priority}
                         options={priorityOptions}
                         onChange={onPriorityChange}
+                        disabled={createTaskMutation.isPending}
                     />
                     <TaskSelectField
                         name="status"
@@ -152,14 +177,15 @@ const CreateTaskForm: FC = (): ReactElement => {
                         value={status}
                         options={statusOptions}
                         onChange={onStatusChange}
+                        disabled={createTaskMutation.isPending}
                     />
                 </Stack>
-                <LinearProgress />
+                {createTaskMutation.isPending && <LinearProgress />}
                 <Button
                     variant="contained"
                     size="large"
                     fullWidth
-                    disabled={isCreateBtnDisabled}
+                    disabled={!title || !description || !duedate}
                     onClick={onSubmitHandler}
                 >
                     Create Task

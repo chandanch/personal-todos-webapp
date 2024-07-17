@@ -4,7 +4,7 @@ import { Status } from '../../../enums/status';
 export interface ICreateTask {
     title: string;
     description: string;
-    dueDate: Date;
+    duedate: string;
     priority: string;
     status: string;
 }
@@ -13,7 +13,7 @@ export interface ICreateTask {
 const myTask: ICreateTask = {
     title: 'dd',
     description: 'dsdsd',
-    dueDate: new Date(),
+    duedate: new Date().toISOString(),
     priority: Priority.low,
     status: Status.completed,
 };
