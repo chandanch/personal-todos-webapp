@@ -55,7 +55,7 @@ const CreateTaskForm: FC = (): ReactElement => {
     const [description, setDescription] = useState<string | undefined>(
         undefined,
     );
-    const [dueDate, setDueDate] = useState<Date | null>(new Date());
+    const [duedate, setDueDate] = useState<Date | null>(new Date());
     const [status, setStatus] = useState<string>(Status.todo);
     const [priority, setPriority] = useState<string>(Priority.low);
     const [isCreateBtnDisabled, setCreateBtnState] = useState(true);
@@ -63,19 +63,19 @@ const CreateTaskForm: FC = (): ReactElement => {
     const onTitleChange = (
         event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
     ) => {
-        setCreateBtnState(!(title && description && dueDate));
+        setCreateBtnState(!(title && description && duedate));
         setTitle(event.target.value);
     };
 
     const onDescChange = (
         event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
     ) => {
-        setCreateBtnState(!(title && description && dueDate));
+        setCreateBtnState(!(title && description && duedate));
         setDescription(event.target.value);
     };
 
     const onDueDateChange = (newDate: Date | null) => {
-        setCreateBtnState(!(title && description && dueDate));
+        setCreateBtnState(!(title && description && duedate));
         setDueDate(newDate);
     };
 
@@ -102,11 +102,27 @@ const CreateTaskForm: FC = (): ReactElement => {
     });
 
     const onSubmitHandler = (): void => {
-        if (!title || !description || !dueDate) {
+        if (!title || !description || !duedate) {
             alert('title, description and due date are required');
             return;
         }
-        console.log('creating task');
+
+        const taskReqData: ICreateTask = {
+            title,
+            description,
+            duedate: duedate.toISOString(),
+            priority,
+            status,
+        };
+
+        console.log('creating task', taskReqData);
+
+        createTaskMutation.mutate(taskReqData, {
+            onSuccess: () => {
+                alert('Task Created');
+            },
+            onError: () => alert('Failed! Task creation'),
+        });
     };
 
     return (
@@ -131,7 +147,7 @@ const CreateTaskForm: FC = (): ReactElement => {
             <Stack sx={{ width: '100%' }} spacing={2}>
                 <TaskTitleField onChange={onTitleChange} disabled={false} />
                 <TaskDescField onChange={onDescChange} disabled={false} />
-                <TaskDateField value={dueDate} onChange={onDueDateChange} />
+                <TaskDateField value={duedate} onChange={onDueDateChange} />
                 <Stack spacing={2} direction="row">
                     <TaskSelectField
                         name="priority"
