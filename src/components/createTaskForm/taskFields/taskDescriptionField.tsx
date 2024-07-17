@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import { ITextField } from '../interfaces/ITextField';
 
 const TaskDescField: FC<ITextField> = (props): ReactElement => {
-    const { onChange = () => {}, disabled = false } = props;
+    const { onChange = () => {}, disabled = false, value = '' } = props;
     return (
         <TextField
             id="description"
@@ -18,6 +18,7 @@ const TaskDescField: FC<ITextField> = (props): ReactElement => {
             rows={5}
             fullWidth
             color="info"
+            value={value}
             disabled={disabled}
             onChange={onChange}
         />

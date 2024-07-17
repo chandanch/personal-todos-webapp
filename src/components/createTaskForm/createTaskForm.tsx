@@ -119,9 +119,17 @@ const CreateTaskForm: FC = (): ReactElement => {
                 // alert('Task Created');
                 setshowSuccessAlert(true);
 
+                // remove alert after interval
                 setTimeout(() => {
                     setshowSuccessAlert(false);
                 }, 5000);
+
+                // reset input fields
+                setTitle('');
+                setDescription('');
+                setDueDate(new Date());
+                setStatus(Status.todo);
+                setPriority(Priority.low);
             },
             onError: () => alert('Failed! Task creation'),
         });
@@ -152,10 +160,12 @@ const CreateTaskForm: FC = (): ReactElement => {
                 <TaskTitleField
                     onChange={onTitleChange}
                     disabled={createTaskMutation.isPending}
+                    value={title}
                 />
                 <TaskDescField
                     onChange={onDescChange}
                     disabled={createTaskMutation.isPending}
+                    value={description}
                 />
                 <TaskDateField
                     value={duedate}
