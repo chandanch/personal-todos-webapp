@@ -38,6 +38,9 @@ const makeHTTPRequest = async <T>(
 ): Promise<T> => {
     try {
         const response = await fetch(url, generateRequestOptions(method, body));
+        if (!response.ok) {
+            throw new Error('An Error Ocurred');
+        }
         const responseData = await response.json();
         return responseData as Promise<T>;
     } catch (error) {
