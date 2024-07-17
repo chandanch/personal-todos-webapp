@@ -134,13 +134,15 @@ const CreateTaskForm: FC = (): ReactElement => {
             px={4}
             my={6}
         >
-            <Alert
-                severity="success"
-                sx={{ width: '100%', marginBottom: '16px' }}
-            >
-                <AlertTitle>Success</AlertTitle>
-                Todo has been added!
-            </Alert>
+            {createTaskMutation.isSuccess && (
+                <Alert
+                    severity="success"
+                    sx={{ width: '100%', marginBottom: '16px' }}
+                >
+                    <AlertTitle>Success</AlertTitle>
+                    Todo has been added!
+                </Alert>
+            )}
             <Typography mb={2} component="h2" variant="h6">
                 Create New Task
             </Typography>
@@ -164,7 +166,7 @@ const CreateTaskForm: FC = (): ReactElement => {
                         onChange={onStatusChange}
                     />
                 </Stack>
-                <LinearProgress />
+                {createTaskMutation.isPending && <LinearProgress />}
                 <Button
                     variant="contained"
                     size="large"
