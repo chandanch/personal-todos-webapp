@@ -58,24 +58,21 @@ const CreateTaskForm: FC = (): ReactElement => {
     const [duedate, setDueDate] = useState<Date | null>(new Date());
     const [status, setStatus] = useState<string>(Status.todo);
     const [priority, setPriority] = useState<string>(Priority.low);
-    const [isCreateBtnDisabled, setCreateBtnState] = useState(true);
+    const [showSuccessAlert, setshowSuccessAlert] = useState<boolean>(false);
 
     const onTitleChange = (
         event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
     ) => {
-        setCreateBtnState(!(title && description && duedate));
         setTitle(event.target.value);
     };
 
     const onDescChange = (
         event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
     ) => {
-        setCreateBtnState(!(title && description && duedate));
         setDescription(event.target.value);
     };
 
     const onDueDateChange = (newDate: Date | null) => {
-        setCreateBtnState(!(title && description && duedate));
         setDueDate(newDate);
     };
 
@@ -120,6 +117,11 @@ const CreateTaskForm: FC = (): ReactElement => {
         createTaskMutation.mutate(taskReqData, {
             onSuccess: () => {
                 // alert('Task Created');
+                setshowSuccessAlert(true);
+
+                setTimeout(() => {
+                    setshowSuccessAlert(false);
+                }, 5000);
             },
             onError: () => alert('Failed! Task creation'),
         });
@@ -134,7 +136,7 @@ const CreateTaskForm: FC = (): ReactElement => {
             px={4}
             my={6}
         >
-            {createTaskMutation.isSuccess && (
+            {showSuccessAlert && (
                 <Alert
                     severity="success"
                     sx={{ width: '100%', marginBottom: '16px' }}
