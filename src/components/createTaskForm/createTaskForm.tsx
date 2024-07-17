@@ -119,7 +119,7 @@ const CreateTaskForm: FC = (): ReactElement => {
 
         createTaskMutation.mutate(taskReqData, {
             onSuccess: () => {
-                alert('Task Created');
+                // alert('Task Created');
             },
             onError: () => alert('Failed! Task creation'),
         });
@@ -147,9 +147,19 @@ const CreateTaskForm: FC = (): ReactElement => {
                 Create New Task
             </Typography>
             <Stack sx={{ width: '100%' }} spacing={2}>
-                <TaskTitleField onChange={onTitleChange} disabled={false} />
-                <TaskDescField onChange={onDescChange} disabled={false} />
-                <TaskDateField value={duedate} onChange={onDueDateChange} />
+                <TaskTitleField
+                    onChange={onTitleChange}
+                    disabled={createTaskMutation.isPending}
+                />
+                <TaskDescField
+                    onChange={onDescChange}
+                    disabled={createTaskMutation.isPending}
+                />
+                <TaskDateField
+                    value={duedate}
+                    onChange={onDueDateChange}
+                    disabled={createTaskMutation.isPending}
+                />
                 <Stack spacing={2} direction="row">
                     <TaskSelectField
                         name="priority"
@@ -157,6 +167,7 @@ const CreateTaskForm: FC = (): ReactElement => {
                         value={priority}
                         options={priorityOptions}
                         onChange={onPriorityChange}
+                        disabled={createTaskMutation.isPending}
                     />
                     <TaskSelectField
                         name="status"
@@ -164,6 +175,7 @@ const CreateTaskForm: FC = (): ReactElement => {
                         value={status}
                         options={statusOptions}
                         onChange={onStatusChange}
+                        disabled={createTaskMutation.isPending}
                     />
                 </Stack>
                 {createTaskMutation.isPending && <LinearProgress />}
@@ -171,7 +183,7 @@ const CreateTaskForm: FC = (): ReactElement => {
                     variant="contained"
                     size="large"
                     fullWidth
-                    disabled={isCreateBtnDisabled}
+                    disabled={!title || !description || !duedate}
                     onClick={onSubmitHandler}
                 >
                     Create Task
