@@ -1,4 +1,5 @@
 import { Priority } from '../../../enums/priority';
+import { Status } from '../../../enums/status';
 
 export interface ITaskDetails {
     title: string;
@@ -6,4 +7,5 @@ export interface ITaskDetails {
     duedate: string;
     id: string;
     priority: `${Priority}`;
+    status: `${Status}`;
 }

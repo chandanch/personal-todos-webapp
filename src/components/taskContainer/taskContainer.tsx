@@ -6,10 +6,11 @@ import { Status } from '../../enums/status';
 import Task from '../task/task';
 import { useQuery } from '@tanstack/react-query';
 import makeHTTPRequest from '../../services/httpService';
+import { ITaskDetails } from '../task/interfaces/ITaskDetails';
 
 const TaskContainer: FC = (): ReactElement => {
     const fetchTasks = async () => {
-        return await makeHTTPRequest(
+        return await makeHTTPRequest<ITaskDetails[]>(
             `${process.env.REACT_APP_BASE_URL}/tasks`,
             'GET',
         );
