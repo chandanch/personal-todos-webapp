@@ -22,7 +22,7 @@ const TaskContainer: FC = (): ReactElement => {
     });
 
     if (isPending) {
-        return <div>Loading Tasks....</div>;
+        return <div>Fetching Tasks....</div>;
     }
 
     return (
