@@ -1,11 +1,29 @@
 import { Box, Grid } from '@mui/material';
 import { format } from 'date-fns';
-import React, { FC, ReactElement } from 'react';
+import React, { FC, ReactElement, useEffect } from 'react';
 import TaskCounter from '../taskCounter/taskCounter';
 import { Status } from '../../enums/status';
 import Task from '../task/task';
+import { useQuery } from '@tanstack/react-query';
+import makeHTTPRequest from '../../services/httpService';
 
 const TaskContainer: FC = (): ReactElement => {
+    const fetchTasks = async () => {
+        return await makeHTTPRequest(
+            `${process.env.REACT_APP_BASE_URL}/tasks`,
+            'GET',
+        );
+    };
+
+    const { isPending, isError, data } = useQuery({
+        queryKey: ['tasks'],
+        queryFn: fetchTasks,
+    });
+
+    if (isPending) {
+        return <div>Loading Tasks....</div>;
+    }
+
     return (
         <>
             <Box mb={8} px={4}>
