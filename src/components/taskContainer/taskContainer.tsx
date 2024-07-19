@@ -49,8 +49,8 @@ const TaskContainer: FC = (): ReactElement => {
                     <TaskCounter count={10} status={Status.completed} />
                 </Grid>
                 <Grid item display="flex" flexDirection="column" xs={10} md={8}>
-                    <Task />
-                    <Task />
+                    <Task id="11" status="sww" />
+                    <Task id="11" status="sww" />
                 </Grid>
             </Grid>
         </>

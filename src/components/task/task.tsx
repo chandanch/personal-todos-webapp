@@ -42,6 +42,8 @@ const Task: FC<ITask> = (props): ReactElement => {
                 <TaskFooter
                     onStatusToggle={onStatusToggle}
                     onmarkComplete={onmarkComplete}
+                    id={id}
+                    status={status}
                 />
             </Box>
         </>
@@ -54,7 +56,8 @@ Task.propTypes = {
     taskDate: PropTypes.instanceOf(Date),
     onmarkComplete: PropTypes.func,
     onStatusToggle: PropTypes.func,
-    status: PropTypes.string,
+    status: PropTypes.string.isRequired,
+    id: PropTypes.string.isRequired,
     priority: PropTypes.string,
 };
 

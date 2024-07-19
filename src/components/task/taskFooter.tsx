@@ -8,6 +8,8 @@ const TaskFooter: FC<ITaskFooter> = (props): ReactElement => {
     const {
         onStatusToggle = (e) => console.log(e.target.value),
         onmarkComplete = (e) => console.log(e),
+        id,
+        status,
     } = props;
 
     return (
@@ -42,6 +44,8 @@ const TaskFooter: FC<ITaskFooter> = (props): ReactElement => {
 TaskFooter.propTypes = {
     onmarkComplete: PropTypes.func.isRequired,
     onStatusToggle: PropTypes.func.isRequired,
+    id: PropTypes.string.isRequired,
+    status: PropTypes.string.isRequired,
 };
 
 export default TaskFooter;
