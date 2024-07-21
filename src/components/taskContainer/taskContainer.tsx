@@ -25,6 +25,10 @@ const TaskContainer: FC = (): ReactElement => {
         return <div>Fetching Tasks....</div>;
     }
 
+    if (isError) {
+        return <div>Error in Fetching Task</div>;
+    }
+
     return (
         <>
             <Box mb={8} px={4}>
