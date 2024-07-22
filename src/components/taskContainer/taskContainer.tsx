@@ -53,6 +53,10 @@ const TaskContainer: FC = (): ReactElement => {
                     {isError && (
                         <Alert severity="error">Error in Fetching Tasks</Alert>
                     )}
+
+                    {!isError && Array.isArray(data) && data.length === 0 && (
+                        <Alert severity="warning">No Tasks Found!</Alert>
+                    )}
                     <Task id="11" status="sww" />
                     <Task id="11" status="sww" />
                 </Grid>
