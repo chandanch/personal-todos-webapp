@@ -1,4 +1,4 @@
-import { Box, Grid } from '@mui/material';
+import { Alert, Box, Grid } from '@mui/material';
 import { format } from 'date-fns';
 import React, { FC, ReactElement, useEffect } from 'react';
 import TaskCounter from '../taskCounter/taskCounter';
@@ -16,17 +16,13 @@ const TaskContainer: FC = (): ReactElement => {
         );
     };
 
-    const { isPending, isError, data } = useQuery({
+    const { isPending, isError, data, error } = useQuery({
         queryKey: ['tasks'],
         queryFn: fetchTasks,
     });
 
     if (isPending) {
         return <div>Fetching Tasks....</div>;
-    }
-
-    if (isError) {
-        return <div>Error in Fetching Task</div>;
     }
 
     return (
@@ -52,7 +48,11 @@ const TaskContainer: FC = (): ReactElement => {
                     <TaskCounter count={4} status={Status.inProgress} />
                     <TaskCounter count={10} status={Status.completed} />
                 </Grid>
+
                 <Grid item display="flex" flexDirection="column" xs={10} md={8}>
+                    {isError && (
+                        <Alert severity="error">Error in Fetching Tasks</Alert>
+                    )}
                     <Task id="11" status="sww" />
                     <Task id="11" status="sww" />
                 </Grid>
