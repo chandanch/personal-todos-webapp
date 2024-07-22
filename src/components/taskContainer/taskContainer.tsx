@@ -1,4 +1,4 @@
-import { Alert, Box, Grid } from '@mui/material';
+import { Alert, Box, Grid, LinearProgress, Drawer } from '@mui/material';
 import { format } from 'date-fns';
 import React, { FC, ReactElement, useEffect } from 'react';
 import TaskCounter from '../taskCounter/taskCounter';
@@ -50,15 +50,40 @@ const TaskContainer: FC = (): ReactElement => {
                 </Grid>
 
                 <Grid item display="flex" flexDirection="column" xs={10} md={8}>
-                    {isError && (
-                        <Alert severity="error">Error in Fetching Tasks</Alert>
-                    )}
+                    <>
+                        {isError && (
+                            <Alert severity="error">
+                                Error in Fetching Tasks
+                            </Alert>
+                        )}
 
-                    {!isError && Array.isArray(data) && data.length === 0 && (
-                        <Alert severity="warning">No Tasks Found!</Alert>
-                    )}
-                    <Task id="11" status="sww" />
-                    <Task id="11" status="sww" />
+                        {!isError &&
+                            Array.isArray(data) &&
+                            data.length === 0 && (
+                                <Alert severity="warning">
+                                    No Tasks Found!
+                                </Alert>
+                            )}
+                        {isPending ? (
+                            <LinearProgress />
+                        ) : (
+                            Array.isArray(data) &&
+                            data.length > 0 &&
+                            data.map((task, index) => {
+                                return (
+                                    <Task
+                                        id={task.id}
+                                        title={task.title}
+                                        description={task.description}
+                                        status={task.status}
+                                        priority={task.priority}
+                                        taskDate={new Date(task.duedate)}
+                                        key={index}
+                                    />
+                                );
+                            })
+                        )}
+                    </>
                 </Grid>
             </Grid>
         </>
