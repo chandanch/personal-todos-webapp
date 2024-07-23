@@ -61,7 +61,7 @@ const TaskContainer: FC = (): ReactElement => {
                             Array.isArray(data) &&
                             data.length === 0 && (
                                 <Alert severity="warning">
-                                    No Tasks Found!
+                                    No Tasks Found! Start Adding Tasks!
                                 </Alert>
                             )}
                         {isPending ? (
