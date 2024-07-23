@@ -44,7 +44,16 @@ const TaskContainer: FC = (): ReactElement => {
                     xs={12}
                     mb={8}
                 >
-                    <TaskCounter count={8} status={Status.todo} />
+                    <TaskCounter
+                        count={
+                            Array.isArray(data) &&
+                            data.length > 0 &&
+                            data.length
+                                ? data.length
+                                : 5
+                        }
+                        status={Status.todo}
+                    />
                     <TaskCounter count={4} status={Status.inProgress} />
                     <TaskCounter count={10} status={Status.completed} />
                 </Grid>
