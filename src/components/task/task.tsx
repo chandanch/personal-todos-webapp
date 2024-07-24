@@ -37,7 +37,7 @@ const Task: FC<ITask> = (props): ReactElement => {
                     borderColor: `${emitPriorityBorderColor(priority)}`,
                 }}
             >
-                <TaskHeader title={title} taskDate={new Date()} />
+                <TaskHeader title={title} taskDate={taskDate} />
                 <TaskBody description={description} />
                 <TaskFooter
                     onStatusToggle={onStatusToggle}
