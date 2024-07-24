@@ -3,6 +3,7 @@ import React, { FC, ReactElement } from 'react';
 import { ITaskFooter } from './interfaces/ITaskFooter';
 
 import PropTypes from 'prop-types';
+import { Status } from '../../enums/status';
 
 const TaskFooter: FC<ITaskFooter> = (props): ReactElement => {
     const {
@@ -24,6 +25,7 @@ const TaskFooter: FC<ITaskFooter> = (props): ReactElement => {
                     <Switch
                         onChange={(e) => onStatusToggle(e)}
                         color="warning"
+                        checked={status === Status.inProgress}
                     />
                 }
                 label="In Progress"
