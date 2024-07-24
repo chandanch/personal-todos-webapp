@@ -8,6 +8,9 @@ import { Status } from '../../enums/status';
 import { Priority } from '../../enums/priority';
 import PropTypes from 'prop-types';
 import emitPriorityBorderColor from './helpers/emitPriorityBorderColor';
+import { useMutation } from '@tanstack/react-query';
+import makeHTTPRequest from '../../services/httpService';
+import { ITaskUpdate } from './interfaces/ITaskUpdate';
 
 const Task: FC<ITask> = (props): ReactElement => {
     const {
@@ -20,6 +23,18 @@ const Task: FC<ITask> = (props): ReactElement => {
         onmarkComplete = (e) => console.log('Task Completed'),
         taskDate = new Date(),
     } = props;
+
+    const updateTask = (data: ITaskUpdate) => {
+        return makeHTTPRequest(
+            `${process.env.REACT_APP_BASE_URL}/tasks`,
+            'PUT',
+            data,
+        );
+    };
+
+    const updateTaskMutation = useMutation({
+        mutationFn: updateTask,
+    });
 
     return (
         <>
