@@ -16,7 +16,7 @@ const TaskContainer: FC = (): ReactElement => {
         );
     };
 
-    const { isPending, isError, data, error } = useQuery({
+    const { isPending, isError, data, error, isSuccess } = useQuery({
         queryKey: ['tasks'],
         queryFn: fetchTasks,
     });
@@ -79,7 +79,8 @@ const TaskContainer: FC = (): ReactElement => {
                             Array.isArray(data) &&
                             data.length > 0 &&
                             data.map((task, index) => {
-                                return (
+                                return task.status === Status.todo ||
+                                    task.status === Status.inProgress ? (
                                     <Task
                                         id={task.id}
                                         title={task.title}
@@ -89,6 +90,8 @@ const TaskContainer: FC = (): ReactElement => {
                                         taskDate={new Date(task.duedate)}
                                         key={index}
                                     />
+                                ) : (
+                                    false
                                 );
                             })
                         )}
