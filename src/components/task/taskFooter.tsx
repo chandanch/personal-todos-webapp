@@ -25,7 +25,7 @@ const TaskFooter: FC<ITaskFooter> = (props): ReactElement => {
                     <Switch
                         onChange={(e) => onStatusToggle(e, id)}
                         color="warning"
-                        checked={status === Status.inProgress}
+                        defaultChecked={status === Status.inProgress}
                     />
                 }
                 label="In Progress"
