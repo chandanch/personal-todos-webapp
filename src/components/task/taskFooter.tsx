@@ -23,7 +23,7 @@ const TaskFooter: FC<ITaskFooter> = (props): ReactElement => {
             <FormControlLabel
                 control={
                     <Switch
-                        onChange={(e) => onStatusToggle(e)}
+                        onChange={(e) => onStatusToggle(e, id)}
                         color="warning"
                         checked={status === Status.inProgress}
                     />
