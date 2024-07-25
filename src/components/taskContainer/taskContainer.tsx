@@ -7,6 +7,8 @@ import Task from '../task/task';
 import { useQuery } from '@tanstack/react-query';
 import makeHTTPRequest from '../../services/httpService';
 import { ITaskDetails } from '../task/interfaces/ITaskDetails';
+import { useMutation } from '@tanstack/react-query';
+import { ITaskUpdate } from '../task/interfaces/ITaskUpdate';
 
 const TaskContainer: FC = (): ReactElement => {
     const fetchTasks = async () => {
@@ -24,6 +26,25 @@ const TaskContainer: FC = (): ReactElement => {
     if (isPending) {
         return <div>Fetching Tasks....</div>;
     }
+
+    const updateTask = (data: ITaskUpdate) => {
+        return makeHTTPRequest(
+            `${process.env.REACT_APP_BASE_URL}/tasks`,
+            'PUT',
+            data,
+        );
+    };
+
+    // const updateTaskMutation = useMutation({
+    //     mutationFn: updateTask,
+    // });
+
+    const onTaskStatusToggle = (
+        e: React.ChangeEvent<HTMLInputElement>,
+        id: string,
+    ): void => {
+        console.log(e.target.checked, id);
+    };
 
     return (
         <>
@@ -89,6 +110,7 @@ const TaskContainer: FC = (): ReactElement => {
                                         priority={task.priority}
                                         taskDate={new Date(task.duedate)}
                                         key={index}
+                                        onStatusToggle={onTaskStatusToggle}
                                     />
                                 ) : (
                                     false
