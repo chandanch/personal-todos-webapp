@@ -35,7 +35,7 @@ const TaskFooter: FC<ITaskFooter> = (props): ReactElement => {
                 color="success"
                 size="small"
                 sx={{ color: '#ffffff' }}
-                onClick={(e) => onmarkComplete(e)}
+                onClick={(e) => onmarkComplete(e, id)}
             >
                 Mark as Done
             </Button>

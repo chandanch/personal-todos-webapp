@@ -61,6 +61,28 @@ const TaskContainer: FC = (): ReactElement => {
         );
     };
 
+    const markTaskAsComplete = (
+        e:
+            | React.MouseEvent<HTMLButtonElement>
+            | React.MouseEvent<HTMLAnchorElement>,
+        id: string,
+    ) => {
+        updateTaskMutation.mutate(
+            {
+                status: Status.completed,
+                id,
+            },
+            {
+                onSuccess: () => {
+                    console.log('Task marked as complete');
+                },
+                onError: (error) => {
+                    console.log('error in updating task', error);
+                },
+            },
+        );
+    };
+
     return (
         <>
             <Box mb={8} px={4}>
@@ -82,9 +104,7 @@ const TaskContainer: FC = (): ReactElement => {
                 >
                     <TaskCounter
                         count={
-                            Array.isArray(data) &&
-                            data.length > 0 &&
-                            data.length
+                            Array.isArray(data) && data.length > 0
                                 ? data.length
                                 : 5
                         }
@@ -126,6 +146,7 @@ const TaskContainer: FC = (): ReactElement => {
                                         taskDate={new Date(task.duedate)}
                                         key={index}
                                         onStatusToggle={onTaskStatusToggle}
+                                        onmarkComplete={markTaskAsComplete}
                                     />
                                 ) : (
                                     false
