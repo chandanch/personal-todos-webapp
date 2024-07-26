@@ -18,6 +18,18 @@ const TaskContainer: FC = (): ReactElement => {
         );
     };
 
+    const updateTask = ({ id, status }: ITaskUpdate) => {
+        return makeHTTPRequest(
+            `${process.env.REACT_APP_BASE_URL}/tasks/${id}`,
+            'PATCH',
+            { status },
+        );
+    };
+
+    const updateTaskMutation = useMutation({
+        mutationFn: updateTask,
+    });
+
     const { isPending, isError, data, error, isSuccess } = useQuery({
         queryKey: ['tasks'],
         queryFn: fetchTasks,
@@ -27,23 +39,26 @@ const TaskContainer: FC = (): ReactElement => {
         return <div>Fetching Tasks....</div>;
     }
 
-    const updateTask = (data: ITaskUpdate) => {
-        return makeHTTPRequest(
-            `${process.env.REACT_APP_BASE_URL}/tasks`,
-            'PUT',
-            data,
-        );
-    };
-
-    // const updateTaskMutation = useMutation({
-    //     mutationFn: updateTask,
-    // });
-
     const onTaskStatusToggle = (
         e: React.ChangeEvent<HTMLInputElement>,
         id: string,
     ): void => {
         console.log(e.target.checked, id);
+
+        updateTaskMutation.mutate(
+            {
+                status: e.target.checked ? Status.inProgress : Status.todo,
+                id,
+            },
+            {
+                onSuccess: () => {
+                    console.log('Task Updated');
+                },
+                onError: (error) => {
+                    console.log('error in updating task', error);
+                },
+            },
+        );
     };
 
     return (
