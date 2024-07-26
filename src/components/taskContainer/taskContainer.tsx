@@ -7,6 +7,8 @@ import Task from '../task/task';
 import { useQuery } from '@tanstack/react-query';
 import makeHTTPRequest from '../../services/httpService';
 import { ITaskDetails } from '../task/interfaces/ITaskDetails';
+import { useMutation } from '@tanstack/react-query';
+import { ITaskUpdate } from '../task/interfaces/ITaskUpdate';
 
 const TaskContainer: FC = (): ReactElement => {
     const fetchTasks = async () => {
@@ -16,6 +18,18 @@ const TaskContainer: FC = (): ReactElement => {
         );
     };
 
+    const updateTask = ({ id, status }: ITaskUpdate) => {
+        return makeHTTPRequest(
+            `${process.env.REACT_APP_BASE_URL}/tasks/${id}`,
+            'PATCH',
+            { status },
+        );
+    };
+
+    const updateTaskMutation = useMutation({
+        mutationFn: updateTask,
+    });
+
     const { isPending, isError, data, error, isSuccess } = useQuery({
         queryKey: ['tasks'],
         queryFn: fetchTasks,
@@ -24,6 +38,28 @@ const TaskContainer: FC = (): ReactElement => {
     if (isPending) {
         return <div>Fetching Tasks....</div>;
     }
+
+    const onTaskStatusToggle = (
+        e: React.ChangeEvent<HTMLInputElement>,
+        id: string,
+    ): void => {
+        console.log(e.target.checked, id);
+
+        updateTaskMutation.mutate(
+            {
+                status: e.target.checked ? Status.inProgress : Status.todo,
+                id,
+            },
+            {
+                onSuccess: () => {
+                    console.log('Task Updated');
+                },
+                onError: (error) => {
+                    console.log('error in updating task', error);
+                },
+            },
+        );
+    };
 
     return (
         <>
@@ -89,6 +125,7 @@ const TaskContainer: FC = (): ReactElement => {
                                         priority={task.priority}
                                         taskDate={new Date(task.duedate)}
                                         key={index}
+                                        onStatusToggle={onTaskStatusToggle}
                                     />
                                 ) : (
                                     false

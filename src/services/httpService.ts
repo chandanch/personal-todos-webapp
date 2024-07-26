@@ -1,6 +1,6 @@
 import { error } from 'console';
 
-type HTTP_METHODS = 'GET' | 'POST' | 'PUT' | 'DELETE';
+type HTTP_METHODS = 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH';
 
 const generateRequestOptions = (
     method: HTTP_METHODS,
