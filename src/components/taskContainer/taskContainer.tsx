@@ -9,6 +9,7 @@ import makeHTTPRequest from '../../services/httpService';
 import { ITaskDetails } from '../task/interfaces/ITaskDetails';
 import { useMutation } from '@tanstack/react-query';
 import { ITaskUpdate } from '../task/interfaces/ITaskUpdate';
+import { countTasks } from '../task/helpers/taskCounter';
 
 const TaskContainer: FC = (): ReactElement => {
     const fetchTasks = async () => {
@@ -61,6 +62,28 @@ const TaskContainer: FC = (): ReactElement => {
         );
     };
 
+    const markTaskAsComplete = (
+        e:
+            | React.MouseEvent<HTMLButtonElement>
+            | React.MouseEvent<HTMLAnchorElement>,
+        id: string,
+    ) => {
+        updateTaskMutation.mutate(
+            {
+                status: Status.completed,
+                id,
+            },
+            {
+                onSuccess: () => {
+                    console.log('Task marked as complete');
+                },
+                onError: (error) => {
+                    console.log('error in updating task', error);
+                },
+            },
+        );
+    };
+
     return (
         <>
             <Box mb={8} px={4}>
@@ -81,17 +104,17 @@ const TaskContainer: FC = (): ReactElement => {
                     mb={8}
                 >
                     <TaskCounter
-                        count={
-                            Array.isArray(data) &&
-                            data.length > 0 &&
-                            data.length
-                                ? data.length
-                                : 5
-                        }
+                        count={data ? countTasks(data, Status.todo) : 0}
                         status={Status.todo}
                     />
-                    <TaskCounter count={4} status={Status.inProgress} />
-                    <TaskCounter count={10} status={Status.completed} />
+                    <TaskCounter
+                        count={data ? countTasks(data, Status.inProgress) : 0}
+                        status={Status.inProgress}
+                    />
+                    <TaskCounter
+                        count={data ? countTasks(data, Status.completed) : 0}
+                        status={Status.completed}
+                    />
                 </Grid>
 
                 <Grid item display="flex" flexDirection="column" xs={10} md={8}>
@@ -126,6 +149,7 @@ const TaskContainer: FC = (): ReactElement => {
                                         taskDate={new Date(task.duedate)}
                                         key={index}
                                         onStatusToggle={onTaskStatusToggle}
+                                        onmarkComplete={markTaskAsComplete}
                                     />
                                 ) : (
                                     false

@@ -9,6 +9,7 @@ export interface ITaskFooter {
         event:
             | React.MouseEvent<HTMLButtonElement>
             | React.MouseEvent<HTMLAnchorElement>,
+        id: string,
     ) => void;
     id: string;
     status: string;
