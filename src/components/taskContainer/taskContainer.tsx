@@ -1,6 +1,6 @@
 import { Alert, Box, Grid, LinearProgress, Drawer } from '@mui/material';
 import { format } from 'date-fns';
-import React, { FC, ReactElement, useEffect } from 'react';
+import React, { FC, ReactElement, useContext, useEffect } from 'react';
 import TaskCounter from '../taskCounter/taskCounter';
 import { Status } from '../../enums/status';
 import Task from '../task/task';
@@ -10,8 +10,11 @@ import { ITaskDetails } from '../task/interfaces/ITaskDetails';
 import { useMutation } from '@tanstack/react-query';
 import { ITaskUpdate } from '../task/interfaces/ITaskUpdate';
 import { countTasks } from '../task/helpers/taskCounter';
+import { TaskStatusChangeContext } from '../../contexts';
 
 const TaskContainer: FC = (): ReactElement => {
+    const taskStatusChangeContext = useContext(TaskStatusChangeContext);
+
     const fetchTasks = async () => {
         return await makeHTTPRequest<ITaskDetails[]>(
             `${process.env.REACT_APP_BASE_URL}/tasks`,
@@ -31,10 +34,21 @@ const TaskContainer: FC = (): ReactElement => {
         mutationFn: updateTask,
     });
 
-    const { isPending, isError, data, error, isSuccess } = useQuery({
+    const { isPending, isError, data, error, isSuccess, refetch } = useQuery({
         queryKey: ['tasks'],
         queryFn: fetchTasks,
     });
+
+    useEffect(() => {
+        // refresh tasks list
+        refetch();
+    }, [taskStatusChangeContext.isUpdated]);
+
+    useEffect(() => {
+        if (updateTaskMutation.isSuccess) {
+            taskStatusChangeContext.toggleStatus();
+        }
+    }, [updateTaskMutation.isSuccess]);
 
     if (isPending) {
         return <div>Fetching Tasks....</div>;
