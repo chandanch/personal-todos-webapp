@@ -8,7 +8,7 @@ import {
     Stack,
     Typography,
 } from '@mui/material';
-import React, { FC, ReactElement, useState } from 'react';
+import React, { FC, ReactElement, useContext, useState } from 'react';
 import TaskTitleField from './taskFields/taskTitleField';
 import TaskDescField from './taskFields/taskDescriptionField';
 import TaskDateField from './taskFields/taskDateField';
@@ -19,6 +19,7 @@ import { Status } from '../../enums/status';
 import { useMutation } from '@tanstack/react-query';
 import makeHTTPRequest from '../../services/httpService';
 import { ICreateTask } from './interfaces/ICreateTask';
+import { TaskStatusChangeContext } from '../../contexts';
 
 const CreateTaskForm: FC = (): ReactElement => {
     const priorityOptions: ISelectOptions[] = [
@@ -59,6 +60,8 @@ const CreateTaskForm: FC = (): ReactElement => {
     const [status, setStatus] = useState<string>(Status.todo);
     const [priority, setPriority] = useState<string>(Priority.low);
     const [showSuccessAlert, setshowSuccessAlert] = useState<boolean>(false);
+
+    const taskStatusChangeContext = useContext(TaskStatusChangeContext);
 
     const onTitleChange = (
         event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
@@ -123,6 +126,8 @@ const CreateTaskForm: FC = (): ReactElement => {
                 setTimeout(() => {
                     setshowSuccessAlert(false);
                 }, 5000);
+
+                taskStatusChangeContext.toggleStatus();
 
                 // reset input fields
                 setTitle('');
