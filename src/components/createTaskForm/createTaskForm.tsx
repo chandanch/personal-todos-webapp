@@ -89,11 +89,10 @@ const CreateTaskForm: FC = (): ReactElement => {
 
     // Define your mutation function
     const createTask = (data: ICreateTask) => {
-        return makeHTTPRequest(
-            `${process.env.REACT_APP_BASE_URL}/tasks`,
-            'POST',
-            data,
-        );
+        const apiUrl = process.env.REACT_APP_BASE_URL
+            ? process.env.REACT_APP_BASE_URL
+            : window.config?.apiUrl;
+        return makeHTTPRequest(`${apiUrl}/tasks`, 'POST', data);
     };
 
     // define create todo mutation
