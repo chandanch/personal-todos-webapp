@@ -14,20 +14,16 @@ import { TaskStatusChangeContext } from '../../contexts';
 
 const TaskContainer: FC = (): ReactElement => {
     const taskStatusChangeContext = useContext(TaskStatusChangeContext);
+    const apiUrl = process.env.REACT_APP_BASE_URL
+        ? process.env.REACT_APP_BASE_URL
+        : window.config?.apiUrl;
 
     const fetchTasks = async () => {
-        return await makeHTTPRequest<ITaskDetails[]>(
-            `${process.env.REACT_APP_BASE_URL}/tasks`,
-            'GET',
-        );
+        return await makeHTTPRequest<ITaskDetails[]>(`${apiUrl}/tasks`, 'GET');
     };
 
     const updateTask = ({ id, status }: ITaskUpdate) => {
-        return makeHTTPRequest(
-            `${process.env.REACT_APP_BASE_URL}/tasks/${id}`,
-            'PATCH',
-            { status },
-        );
+        return makeHTTPRequest(`${apiUrl}/tasks/${id}`, 'PATCH', { status });
     };
 
     const updateTaskMutation = useMutation({
