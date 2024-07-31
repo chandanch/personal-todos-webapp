@@ -91,7 +91,7 @@ const CreateTaskForm: FC = (): ReactElement => {
     const createTask = (data: ICreateTask) => {
         const apiUrl = process.env.REACT_APP_BASE_URL
             ? process.env.REACT_APP_BASE_URL
-            : window.config?.apiUrl;
+            : 'https://2c5df69e-f0ef-408c-9524-86f83c225768-dev.e1-us-cdp-2.choreoapis.dev/personaltodos/personaltodosbackend/v1.0';
         return makeHTTPRequest(`${apiUrl}/tasks`, 'POST', data);
     };
 
